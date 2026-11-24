@@ -17,13 +17,14 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        # 【練習5】背景の横座標を変数xで表現し、左へ移動させる
         x = tmr
         screen.blit(bg_img, [-x, 0])
+        # 【練習7】1枚目の右隣（-x + 1600）にもう1回背景画像をblit
+        screen.blit(bg_img, [-x + 1600, 0])
         screen.blit(kk_img, [300, 200])
         
         pg.display.update()
-        tmr += 1
+        tmr += 1        
         clock.tick(200)
 
 
