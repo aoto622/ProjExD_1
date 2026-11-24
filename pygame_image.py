@@ -13,35 +13,31 @@ def main():
     bg_img2 = pg.transform.flip(bg_img, True, False)
     kk_img = pg.image.load("fig/3.png")
     kk_img = pg.transform.flip(kk_img, True, False)
-    
-    # 【練習10-1, 2】こうかとんRectを取得し、中心座標を(300, 200)に設定
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
-    
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        # 【練習10-3】全キーの押下状態リストを取得
         key_lst = pg.key.get_pressed()
-        # 【練習10-4】押下キーに応じてmove_ip(横移動量, 縦移動量)で移動
+        # 【演習1-①】毎フレーム背景と同じ速度で左に流す
+        kk_rct.move_ip((-1, 0))
         if key_lst[pg.K_UP]:
             kk_rct.move_ip((0, -1))
         if key_lst[pg.K_DOWN]:
             kk_rct.move_ip((0, +1))
         if key_lst[pg.K_LEFT]:
             kk_rct.move_ip((-1, 0))
+        # 【演習1-②】左への移動(-1)を打ち消して右に+1進むため、移動量を+2にする
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((+1, 0))
+            kk_rct.move_ip((+2, 0))
 
         x = tmr % 3200
         screen.blit(bg_img, [-x, 0])
         screen.blit(bg_img2, [-x + 1600, 0])
         screen.blit(bg_img, [-x + 3200, 0])
-        # 【練習10-5】座標リスト[300, 200]ではなくkk_rctを使ってblitする
         screen.blit(kk_img, kk_rct)
-        
         pg.display.update()
         tmr += 1        
         clock.tick(200)
