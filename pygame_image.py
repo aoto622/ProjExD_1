@@ -21,17 +21,18 @@ def main():
             if event.type == pg.QUIT: return
 
         key_lst = pg.key.get_pressed()
-        # 【演習1-①】毎フレーム背景と同じ速度で左に流す
-        kk_rct.move_ip((-1, 0))
+        # 【演習2】横・縦の移動量を表す変数を用意（初期値は背景と同じ左方向-1）
+        dx, dy = -1, 0
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip((0, -1))
+            dy -= 1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, +1))
+            dy += 1
         if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
-        # 【演習1-②】左への移動(-1)を打ち消して右に+1進むため、移動量を+2にする
+            dx -= 1
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((+2, 0))
+            dx += 2
+        # 集計した移動量を使って1回だけ移動させる
+        kk_rct.move_ip((dx, dy))
 
         x = tmr % 3200
         screen.blit(bg_img, [-x, 0])
