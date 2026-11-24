@@ -21,7 +21,6 @@ def main():
             if event.type == pg.QUIT: return
 
         key_lst = pg.key.get_pressed()
-        # 【演習2】横・縦の移動量を表す変数を用意（初期値は背景と同じ左方向-1）
         dx, dy = -1, 0
         if key_lst[pg.K_UP]:
             dy -= 1
@@ -31,7 +30,6 @@ def main():
             dx -= 1
         if key_lst[pg.K_RIGHT]:
             dx += 2
-        # 集計した移動量を使って1回だけ移動させる
         kk_rct.move_ip((dx, dy))
 
         x = tmr % 3200
